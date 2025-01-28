@@ -1,30 +1,31 @@
-# .github/workflows/docker-publish.yml
-name: Docker Build and Push
+name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
+      # Étape 1 : Récupérer le code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Se connecter à Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.sara }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: fatimetou23083/flask_app:latest
+          username: ${{ secrets.fatimetou }}
+          password: ${{ secrets.password }}
+
+      # Étape 3 : Construire l'image Docker
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.fatimetou }}/my-python-app:latest .
+
+      # Étape 4 : Pousser l'image Docker
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.fatimetou }}/my-python-app:latest
