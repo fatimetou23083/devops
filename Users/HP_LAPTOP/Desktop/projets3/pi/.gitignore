@@ -43,3 +43,37 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# استثناء مجلدات النظام والمجلدات غير المرغوب فيها
+$Recycle.Bin/
+Config.Msi/
+Documents and Settings/
+PerfLogs/
+Recovery/
+System Volume Information/
+Users/
+Program Files/
+Program Files (x86)/
+ProgramData/
+AppData/
+.cache/
+.conda/
+.docker/
+.eclipse/
+.gradle/
+.idea/
+.idlerc/
+.matplotlib/
+.nuget/
+.p2/
+.vscode/
+NTUSER.DAT*
+desktop.ini
+*.exe
+*.zip
+*.log
+*.jpg
+*.png
+*.tmp
+/flutter/
+/miniconda3/
+/modelio/
